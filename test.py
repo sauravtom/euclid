@@ -1,5 +1,6 @@
 
 import base64
+import requests
 
 def read_in_chunks(infile, chunk_size=1024):
     while True:
@@ -33,6 +34,10 @@ def string2image():
 	fh = open("imageToSave.png", "wb")
 	fh.write(str.decode('base64'))
 	fh.close()
+
+def bit():
+    payload = {'key1': 'value1', 'key2': 'value2'}
+    r = requests.post("http://httpbin.org/post", data=payload)
 
 if __name__ == '__main__':
 	encode2()

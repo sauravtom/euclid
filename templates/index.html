@@ -101,8 +101,9 @@
               <input type="file" name="file">
               <hr>
               <label>Notes</label>
-              <textarea rows="4" cols="50" name='title'>
-              </textarea>
+              
+              <textarea rows="4" cols="50" name='title'></textarea>
+
               <hr>
               <label>You wallet address</label>
               <input type="text" name="wallet">
@@ -115,11 +116,19 @@
       </div>
 
       <div class="loop">
-        <h3>Recent Uploads</h3>
+        <h3>Recent Uploads</h3><br><br>
         {% for i in all_files %}
           <a href="/e/{{i.objectId}}">
-            <div class="channel_circle" style="background: url('{{i.url}}') no-repeat center;"></div>
-            <p>{{i.name}}</p>
+            <div class="row">
+              <div class="col-md-2">
+                <img src="{{i.url}}" width="100px">
+              </div>
+              <div class="col-md-10">
+                <h3>{{i.name}}</h3>
+              </div>
+            </div>
+            <br>
+            <hr>
           </a>
         {% endfor %}
       </div>
