@@ -46,9 +46,8 @@ def upload_file():
         filename="%s_%s"%(md5,filename)
 
         file.save(os.path.join('%s/temp/'%dir_path, filename))
-        raw_dir = '/home/saurav/chestream_server/chestream_raw/euclid/'
-        os.system("convert %s/temp/%s -quality 10 %s/%s"%(dir_path,filename,raw_dir,filename))
-        url = 'http://orch.in/bytesdump/euclid/%s'%filename
+        os.system("convert %s/temp/%s -quality 10 %s/temp/%s"%(dir_path,filename,dir_path,filename))
+        url = 'http://orch.in/euclid/%s'%filename
         t = Temp(name=name, wallet=wallet,url=url)
         t.save()
 
