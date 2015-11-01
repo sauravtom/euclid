@@ -32,21 +32,25 @@ def genFilename(filename):
 def genReadableFilename(filename):
     pass
 
+def doTransaction():
+    pass
+
 @app.route('/', methods = ['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # Get the FileStorage instance from request
         file = request.files['file']
+        filename = secure_filename(file.filename)
+        #md5 = hashlib.md5(file.read()).hexdigest()
+        filename=genFilename(filename)
+        #filename="%s_%s"%(md5,filename)
+
+        file.save(os.path.join('%s/temp/'%dir_path, filename))
+        
         name=request.form['title']
         wallet=request.form['wallet']
 
-        filename = secure_filename(file.filename)
-        md5 = hashlib.md5(file.read()).hexdigest()
-        filename=genFilename(filename)
-        filename="%s_%s"%(md5,filename)
-
-        file.save(os.path.join('%s/temp/'%dir_path, filename))
-        os.system("convert %s/temp/%s -quality 10 %s/temp/%s"%(dir_path,filename,dir_path,filename))
+        #os.system("convert %s/temp/%s -quality 10 %s/temp/%s"%(dir_path,filename,dir_path,filename))
         url = 'http://orch.in/euclid/%s'%filename
         t = Temp(name=name, wallet=wallet,url=url)
         t.save()
